@@ -1,7 +1,18 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-databaseinstance-mgmt
+data:
+  username: cm9vdAo= #root
+  password: c2VjcmV0cGFzc3dvcmQK #secretpassword
+type: Opaque
+---
 apiVersion: db-claim-operator.misterjoshua.github.com/v1alpha1
 kind: DatabaseInstance
 metadata:
   name: example-databaseinstance
 spec:
-  # Add fields here
-  size: 3
+  unoperatedInstance:
+    managementSecretName: example-databaseinstance-mgmt
+    targetName: dbclaim-mysql
+    targetPort: 3309

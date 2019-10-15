@@ -3,5 +3,5 @@ kind: DatabaseClaim
 metadata:
   name: example-databaseclaim
 spec:
-  # Add fields here
-  size: 3
+  secretName: example-databaseclaim-credentials
+  databaseInstanceName: example-databaseinstance
