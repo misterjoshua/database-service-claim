@@ -1,0 +1,7 @@
+apiVersion: db-claim-operator.misterjoshua.github.com/v1alpha1
+kind: DatabaseClaim
+metadata:
+  name: example-databaseclaim
+spec:
+  # Add fields here
+  size: 3

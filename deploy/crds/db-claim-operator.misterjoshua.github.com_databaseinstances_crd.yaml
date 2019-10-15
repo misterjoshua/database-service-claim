@@ -1,0 +1,59 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: databaseinstances.db-claim-operator.misterjoshua.github.com
+spec:
+  group: db-claim-operator.misterjoshua.github.com
+  names:
+    kind: DatabaseInstance
+    listKind: DatabaseInstanceList
+    plural: databaseinstances
+    singular: databaseinstance
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: DatabaseInstance is the Schema for the databaseinstances API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: DatabaseInstanceSpec defines the desired state of DatabaseInstance
+          properties:
+            unoperatedInstance:
+              properties:
+                managementSecretName:
+                  type: string
+                targetName:
+                  type: string
+                targetPort:
+                  format: int32
+                  type: integer
+              required:
+              - managementSecretName
+              - targetName
+              - targetPort
+              type: object
+          required:
+          - unoperatedInstance
+          type: object
+        status:
+          description: DatabaseInstanceStatus defines the observed state of DatabaseInstance
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
